@@ -1,5 +1,21 @@
 # Spark Python template
 
+
+MY Comments first:
+
+Commands that I used to install the images of the master and worker and the app:
+
+docker run --network nlpnetwork --name spark-master -h spark-master -e ENABLE_INIT_DAEMON=false -d bde2020/spark-master:2.4.0-hadoop2.7
+
+docker run --network nlpnetwork --name spark-worker-1 --link spark-master:spark-master -e ENABLE_INIT_DAEMON=false -d bde2020/spark-worker:2.4.0-hadoop2.7
+
+docker build --rm -t bde/spark-app-nlp .
+
+docker run  --network nlpnetwork  --name my-spark-app-nlp -e ENABLE_INIT_DAEMON=false --link spark-master:spark-master -d bde/spark-app-nlp
+
+
+
+
 The Spark Python template image serves as a base image to build your own Python application to run on a Spark cluster. See [big-data-europe/docker-spark README](https://github.com/big-data-europe/docker-spark) for a description how to setup a Spark cluster.
 
 ### Package your application using pip
